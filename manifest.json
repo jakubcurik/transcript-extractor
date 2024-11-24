@@ -1,16 +1,23 @@
 {
     "manifest_version": 3,
     "name": "Transcript Extractor",
-    "version": "2.0",
-    "description": "Vyextrahuj a zkopíruj si transcript z Fireflies do schránky.",
-    "permissions": ["activeTab", "scripting", "clipboardWrite"],
-    "host_permissions": ["https://fireflies.ai/*"],
-    "action": {
-        "default_popup": "popup.html",
-        "default_icon": {
-            "16": "icon16.png",
-            "48": "icon48.png",
-            "128": "icon128.png"
+    "version": "3.1",
+    "description": "Vyextrahuj a přidej tlačítko pro zkopírování transkriptu z Fireflies přímo na stránku.",
+    "permissions": ["scripting", "activeTab"],
+    "host_permissions": ["https://app.fireflies.ai/*"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://app.fireflies.ai/*"],
+            "js": ["content.js"],
+            "run_at": "document_idle"
         }
+    ],
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
     }
 }
